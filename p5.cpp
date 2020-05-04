@@ -1,32 +1,32 @@
 #include <iostream>
+#include <numeric>
 
 using namespace std;
 
 
 // Find the smallest multiple of integers 1 to 20 inclusive
 int
-main(int, char**)
+main(int argc, char** argv)
 {
-	// Lambda to check for LCM of all values between 1 and 20 inclusive
-	auto isLcm = [] (int val) -> bool {
-		auto retVal{true}; // Innocent until proven guilty
-		for (auto i{1}; i <= 20; ++i) {
-			if (val % i != 0) {
-				retVal = false;
-				break;
-			}
-		}
-
-		return retVal;
-	};
-
-	// Just another brute-force implementation; nothing fancy here
-	for (auto i{1}; ; ++i) {
-		if (isLcm(i)) {
-			clog << "Value: " + to_string(i) << endl;
-			break;
-		}
+	if (argc not_eq 2) {
+		cerr << "Invalid number of arguments!" << endl;
+		cerr << "Please provide upper limit" << endl;
+		return -1;
 	}
 
+	auto ulimit{0u};
+	try {
+		ulimit = stoi(argv[1]);
+	} catch (...) {
+		cerr << "Invalid upper limit: " << argv[1] << endl;
+		return -1;
+	}
+
+	auto val{1};
+	for (auto i{2u}; i < ulimit; ++i) {
+		val = lcm(val, i);
+	}
+
+	clog << "Value: " + to_string(val) << endl;
 	return 0;
 }
