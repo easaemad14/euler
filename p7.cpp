@@ -1,7 +1,10 @@
 #include <iostream>
 #include <cmath>
 
+#include "math.hpp"
+
 using namespace std;
+
 
 // Print out the nth prime number
 int
@@ -21,22 +24,9 @@ main(int argc, char** argv)
 		return 1;
 	}
 
-	// Lambda for checking primality (see p3.cpp)
-	auto isPrime = [] (unsigned val) -> unsigned {
-		auto retVal{true};
-		for (auto i = static_cast<unsigned>(sqrt(val)); i > 1; --i) {
-			if (val % i == 0) {
-				retVal = false;
-				break;
-			}
-		}
-
-		return retVal;
-	};
-
 	auto count{0u};
 	for (auto i{2}; ; ++i) {
-		if (isPrime(i)) {
+		if (isDefinitelyPrime(i)) {
 			++count;
 		}
 

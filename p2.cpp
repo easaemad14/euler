@@ -1,32 +1,10 @@
 #include <vector>
 #include <iostream>
 
+#include "math.hpp"
+
 using namespace std;
 
-
-struct Fib {
-	vector<unsigned> elems;
-
-	unsigned last() {
-		return elems[elems.size() - 1];
-	}
-
-	void shrink() {
-		while (elems.size() > 2) {
-			elems.erase(elems.begin());
-		}
-	}
-
-	// Operator overload to add new elements
-	void operator()(void) {
-		if (elems.size() < 2) { // Start the list with a couple 1s
-			elems.push_back(1);
-		} else { // Add the last two elements
-			elems.push_back(elems[elems.size() - 1] +
-					elems[elems.size() - 2]);
-		}
-	}
-};
 
 // Add even values of the Fibonacci sequence, not exceeding 4 million
 int

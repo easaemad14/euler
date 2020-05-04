@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cmath>
 
+#include "math.hpp"
+
 using namespace std;
 
 
@@ -22,24 +24,11 @@ main(int argc, char** argv)
 		return -1;
 	}
 
-	// Lambda for checking primality
-	auto isPrime = [] (unsigned val) -> unsigned {
-		auto retVal{true};
-		for (auto i = static_cast<unsigned>(sqrt(val)); i > 1; --i) {
-			if (val % i == 0) {
-				retVal = false;
-				break;
-			}
-		}
-
-		return retVal;
-	};
-
 	// Output the sum of the primes below the limit
 	// One is not prime; start with the first known prime
 	auto sum{0ul};
 	for (auto i{2u}; i < ulimit; ++i) {
-		if (isPrime(i)) {
+		if (isDefinitelyPrime(i)) {
 			sum += i;
 		}
 	}
